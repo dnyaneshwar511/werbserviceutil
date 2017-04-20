@@ -12,9 +12,9 @@ import libs.in.webserviceutil.wscalls.models.CheckVersionRequestModel;
 
 public class MainClass
 {
-    private Object object;
+    private static Object object;
 
-    public Object OnLunch(final Context context, CheckVersionRequestModel checkVersionRequestModel, final String requestType, String API_URL)
+    public static Object OnLunch(final Context context, CheckVersionRequestModel checkVersionRequestModel, final String requestType, String API_URL)
     {
         //LsDialog.showProgressDialog(SplashActivity.this);
         OnLounchTask checkVersionTask = new OnLounchTask((Activity) context, requestType, checkVersionRequestModel, API_URL, new OnHttpResponseReceived()
