@@ -12,28 +12,22 @@ import libs.in.webserviceutil.wscalls.models.CheckVersionRequestModel;
 
 public class MainClass
 {
-    public static void OnLunch(final Context context, CheckVersionRequestModel checkVersionRequestModel, String requestType, String API_URL)
+    private Object object;
+
+    public Object OnLunch(final Context context, CheckVersionRequestModel checkVersionRequestModel, final String requestType, String API_URL)
     {
         //LsDialog.showProgressDialog(SplashActivity.this);
         OnLounchTask checkVersionTask = new OnLounchTask((Activity) context, requestType, checkVersionRequestModel, API_URL, new OnHttpResponseReceived()
         {
-
             @Override
             public void onResponseReceived(Object response, HttpResponseStatus responseStatus, int status)
             {
-
-                if (responseStatus == HttpResponseStatus.RESPONSE_RECEIVED)
-                {
-
-                }
-
-
+                object = response;
             }
-
 
         });
         checkVersionTask.execute();
 
+        return object;
     }
-
 }
