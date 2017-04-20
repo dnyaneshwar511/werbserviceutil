@@ -30,28 +30,23 @@ public class MainClass
             @Override
             public void onResponseReceived(Object response, HttpResponseStatus responseStatus, int status)
             {
-
-                response = "{\"requestId\":\"03072eb0-e0b4-4bd9-9a59-8a1b02083024\",\"url\":\"https://api-dev-coin-ls.essplapps.in/lucky_stars/api/draw/verify_answer\",\"statusCode\":412,\"errorCode\":172,\"errors\":[{\"displayMessage\":\"Oops. Incorrect answer.\",\"errorMessage\":null,\"errorType\":\"SQL\",\"errorProperty\":\"\"}]}\n";
                 Gson gson = new Gson();
 
-                ErrorResponse errorResponse = gson.fromJson(response.toString(), ErrorResponse.class);
-
-                if (errorResponse != null)
-                {
-                    for (ErrorResponse.errors model : errorResponse.getError())
-                    {
-                        Toast.makeText(context, model.getDisplayMessage().toString(), Toast.LENGTH_LONG).show();
-                    }
-                }
-
-               /* if (responseStatus == HttpResponseStatus.RESPONSE_RECEIVED)
+                if (responseStatus == HttpResponseStatus.RESPONSE_RECEIVED)
                 {
                     object = response;
                 } else
                 {
+                    ErrorResponse errorResponse = gson.fromJson(response.toString(), ErrorResponse.class);
 
-
-                }*/
+                    if (errorResponse != null)
+                    {
+                        for (ErrorResponse.errors model : errorResponse.getError())
+                        {
+                            Toast.makeText(context, model.getDisplayMessage().toString(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
             }
 
         });
