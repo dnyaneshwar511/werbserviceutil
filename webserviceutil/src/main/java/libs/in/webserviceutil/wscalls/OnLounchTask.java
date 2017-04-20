@@ -23,12 +23,14 @@ public class OnLounchTask extends BaseAsyncTask
 
     private Activity activity = null;
     private boolean isNetworkAvailable = true;
+    String requestType;
 
-    public OnLounchTask(Activity activity, CheckVersionRequestModel requestModel, OnHttpResponseReceived onHttpResponseReceived)
+    public OnLounchTask(Activity activity, String requestType, CheckVersionRequestModel requestModel, OnHttpResponseReceived onHttpResponseReceived)
     {
         this.requestModel = requestModel;
         this.onHttpResponseReceived = onHttpResponseReceived;
         this.activity = activity;
+        this.requestType = requestType;
     }
 
     @Override
@@ -54,7 +56,13 @@ public class OnLounchTask extends BaseAsyncTask
             return null;
         } else
         {
-            request_type = BaseAsyncTask.REQUEST_TYPE_POST;
+            if (requestType.equalsIgnoreCase("POST"))
+            {
+                request_type = BaseAsyncTask.REQUEST_TYPE_POST;
+            } else if (requestType.equalsIgnoreCase("GET"))
+            {
+                request_type = BaseAsyncTask.REQUEST_TYPE_GET;
+            }
 //            request_type = BaseAsyncTask.REQUEST_TYPE_GET;
             url = URLConstants.URL_ON_LUNCH;
             baseActivity = activity;
