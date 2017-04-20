@@ -51,7 +51,6 @@ public class OnLounchTask extends BaseAsyncTask
         {
             request_type = BaseAsyncTask.REQUEST_TYPE_GET;
         }
-//            request_type = BaseAsyncTask.REQUEST_TYPE_GET;
         url = API_URL;
         baseActivity = activity;
         Gson gson = new Gson();
