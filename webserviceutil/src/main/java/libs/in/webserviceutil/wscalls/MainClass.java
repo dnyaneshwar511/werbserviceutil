@@ -12,25 +12,21 @@ import libs.in.webserviceutil.wscalls.models.CheckVersionRequestModel;
 
 public class MainClass
 {
-    public static boolean OnLunch(final Context context, CheckVersionRequestModel checkVersionRequestModel, String requestType, String API_URL)
+    public static void OnLunch(final Context context, CheckVersionRequestModel checkVersionRequestModel, String requestType, String API_URL)
     {
         //LsDialog.showProgressDialog(SplashActivity.this);
         OnLounchTask checkVersionTask = new OnLounchTask((Activity) context, requestType, checkVersionRequestModel, API_URL, new OnHttpResponseReceived()
         {
 
             @Override
-            public boolean onResponseReceived(Object response, HttpResponseStatus responseStatus, int status)
+            public void onResponseReceived(Object response, HttpResponseStatus responseStatus, int status)
             {
 
-                // LsDialog.dismissProgressDialog();
-                // progressBar.setVisibility(View.INVISIBLE);
-                //Gson gson = new Gson();
                 if (responseStatus == HttpResponseStatus.RESPONSE_RECEIVED)
                 {
-                    return true;
+
                 }
 
-                return false;
 
             }
 
@@ -38,7 +34,6 @@ public class MainClass
         });
         checkVersionTask.execute();
 
-        return false;
     }
 
 }

@@ -7,5 +7,5 @@ import libs.in.webserviceutil.wscalls.HttpResponseStatus;
  */
 public interface OnHttpResponseReceived
 {
-    boolean onResponseReceived(Object response, HttpResponseStatus responseStatus, int responseCode);
+    void onResponseReceived(Object response, HttpResponseStatus responseStatus, int responseCode);
 }

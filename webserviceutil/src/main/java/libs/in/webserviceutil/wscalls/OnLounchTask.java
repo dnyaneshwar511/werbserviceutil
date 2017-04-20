@@ -58,7 +58,7 @@ public class OnLounchTask extends BaseAsyncTask
         body = gson.toJson(requestModel);
         return super.doInBackground(params);
     }
-    
+
     @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     protected void onPostExecute(Void aVoid)
