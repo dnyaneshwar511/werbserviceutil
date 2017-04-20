@@ -12,7 +12,7 @@ import libs.in.webserviceutil.wscalls.models.CheckVersionRequestModel;
 
 public class MainClass
 {
-    public boolean OnLunch(final Context context)
+    public static boolean OnLunch(final Context context)
     {
         //LsDialog.showProgressDialog(SplashActivity.this);
 
