@@ -12,13 +12,10 @@ import libs.in.webserviceutil.wscalls.models.CheckVersionRequestModel;
 
 public class MainClass
 {
-    public static boolean OnLunch(final Context context, CheckVersionRequestModel checkVersionRequestModel, String requestType)
+    public static boolean OnLunch(final Context context, CheckVersionRequestModel checkVersionRequestModel, String requestType, String API_URL)
     {
         //LsDialog.showProgressDialog(SplashActivity.this);
-
-        String appVersion = "1.1.1";
-        // final CheckVersionRequestModel checkVersionRequestModel = new CheckVersionRequestModel(appVersion, "Android");
-        OnLounchTask checkVersionTask = new OnLounchTask((Activity) context, requestType, checkVersionRequestModel, new OnHttpResponseReceived()
+        OnLounchTask checkVersionTask = new OnLounchTask((Activity) context, requestType, checkVersionRequestModel, API_URL, new OnHttpResponseReceived()
         {
 
             @Override

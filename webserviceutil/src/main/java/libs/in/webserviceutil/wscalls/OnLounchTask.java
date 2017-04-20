@@ -6,9 +6,7 @@ import android.os.Build;
 
 import com.google.gson.Gson;
 
-import libs.in.webserviceutil.wscalls.constant.Constants;
 import libs.in.webserviceutil.wscalls.constant.OnHttpResponseReceived;
-import libs.in.webserviceutil.wscalls.constant.URLConstants;
 import libs.in.webserviceutil.wscalls.models.CheckVersionRequestModel;
 
 /**
@@ -24,55 +22,43 @@ public class OnLounchTask extends BaseAsyncTask
     private Activity activity = null;
     private boolean isNetworkAvailable = true;
     String requestType;
+    String API_URL;
 
-    public OnLounchTask(Activity activity, String requestType, CheckVersionRequestModel requestModel, OnHttpResponseReceived onHttpResponseReceived)
+    public OnLounchTask(Activity activity, String requestType, CheckVersionRequestModel requestModel, String API_URL, OnHttpResponseReceived onHttpResponseReceived)
     {
         this.requestModel = requestModel;
         this.onHttpResponseReceived = onHttpResponseReceived;
         this.activity = activity;
         this.requestType = requestType;
+        this.API_URL = API_URL;
     }
 
     @Override
     protected void onPreExecute()
     {
         super.onPreExecute();
-        if (activity != null)
-        {
-            /*if (!ConnectionUtils.isInternetAvailable(activity))
-            {
-                isNetworkAvailable = false;
-            }*/
-        }
+
     }
 
     @Override
     protected Void doInBackground(Void... params)
     {
-        if (!isNetworkAvailable)
+
+        if (requestType.equalsIgnoreCase("POST"))
         {
-            this.response = Constants.NO_INTERNET;
-            this.responseStatus = HttpResponseStatus.NO_NEWTWORK_ERROR;
-            return null;
-        } else
+            request_type = BaseAsyncTask.REQUEST_TYPE_POST;
+        } else if (requestType.equalsIgnoreCase("GET"))
         {
-            if (requestType.equalsIgnoreCase("POST"))
-            {
-                request_type = BaseAsyncTask.REQUEST_TYPE_POST;
-            } else if (requestType.equalsIgnoreCase("GET"))
-            {
-                request_type = BaseAsyncTask.REQUEST_TYPE_GET;
-            }
-//            request_type = BaseAsyncTask.REQUEST_TYPE_GET;
-            url = URLConstants.URL_ON_LUNCH;
-            baseActivity = activity;
-            Gson gson = new Gson();
-            body = gson.toJson(requestModel);
-            return super.doInBackground(params);
+            request_type = BaseAsyncTask.REQUEST_TYPE_GET;
         }
+//            request_type = BaseAsyncTask.REQUEST_TYPE_GET;
+        url = API_URL;
+        baseActivity = activity;
+        Gson gson = new Gson();
+        body = gson.toJson(requestModel);
+        return super.doInBackground(params);
     }
-
-
+    
     @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     protected void onPostExecute(Void aVoid)
